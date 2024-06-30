@@ -26,7 +26,7 @@ const Contact = () => {
     e.preventDefault()
 
     emailjs
-      .sendForm('gmail', 'template_9qs297m', reForm.current, 'TuFoz03vuzQI05D9B')
+      .sendForm('service_ny13ons', 'template_9qs297m', reForm.current, 'TuFoz03vuzQI05D9B')
       .then(
         () => {
           alert('Message successfully sent!')
