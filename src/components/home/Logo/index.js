@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap-trial'
-import DrawSVGPlugin from 'gsap-trial/DrawSVGPlugin'
-import LogoS from '../../../assets/images/logo-s.png'
+// import DrawSVGPlugin from 'gsap-trial/DrawSVGPlugin'
+import LogoS from '../../../assets/images/CJ.png'
 import './index.scss'
 
 const Logo = () => {
@@ -10,18 +10,18 @@ const Logo = () => {
   const solidLogoRef = useRef()
 
   useEffect(() => {
-    gsap.registerPlugin(DrawSVGPlugin)
+    // gsap.registerPlugin(DrawSVGPlugin)
 
-    gsap
-      .timeline()
-      .to(bgRef.current, {
-        duration: 1,
-        opacity: 1,
-      })
-      .from(outlineLogoRef.current, {
-        drawSVG: 0,
-        duration: 20,
-      })
+    // gsap
+    //   .timeline()
+    //   .to(bgRef.current, {
+    //     duration: 1,
+    //     opacity: 1,
+    //   })
+    //   .from(outlineLogoRef.current, {
+    //     drawSVG: 0,
+    //     duration: 20,
+    //   })
 
     gsap.fromTo(
       solidLogoRef.current,
