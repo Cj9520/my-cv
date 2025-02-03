@@ -4,8 +4,12 @@ import Layout from './components/Layout';
 import Home from './components/home'
 import About from './components/About';
 import Contact from './components/contact';
- 
+import { BrowserRouter as Router } from 'react-router-dom';
 
+
+<browserrouter basename= "/my-cv">
+<App/>
+</browserrouter>
 
 function App() {
   return (
