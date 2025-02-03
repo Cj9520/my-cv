@@ -4,7 +4,8 @@ import Layout from './components/Layout';
 import Home from './components/home'
 import About from './components/About';
 import Contact from './components/contact';
- 
+
+
 
 function App() {
   return (
