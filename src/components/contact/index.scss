@@ -71,8 +71,15 @@
       float: right;
       text-align: center;
       margin-right: 10px;
+
+      &:hover{
+        background-color: #ffd700;
+        color: #333;
     }
-  }
+       &:active{
+        background-color:#115173;;
+       }
+    }}
   
   .map-wrap {
     background: rgba(8, 253, 216, 0.1);
