@@ -1,12 +1,42 @@
 import { Link, NavLink } from 'react-router-dom';
+import { useState } from 'react';
 import './index.scss';
 import LogoS from '../../assets/images/CJ.png';
 // import LogoSubtitle from '../../assets/images/logo_sub.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faHome, faUser, } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faHome, faUser, faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faInstagram, faLinkedin, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
-const Sidebar = () => (
+const Sidebar = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    return (
+    <div>
+    {/* Hamburger Menu Button */}
+    <div className="hamburger-menu" onClick={() => setMenuOpen(!menuOpen)}>
+        <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} color="#fff" size="2x" />
+    </div>
+          {/* Sidebar Navigation - Slide In */}
+          <div className={`mobile-sidebar ${menuOpen ? 'active' : ''}`}>
+        <nav>
+          <NavLink exact="true" to="/" onClick={() => setMenuOpen(false)}>
+            <FontAwesomeIcon icon={faHome} /> Home
+          </NavLink>
+          <NavLink exact="true" to="/about" onClick={() => setMenuOpen(false)}>
+            <FontAwesomeIcon icon={faUser} /> About
+          </NavLink>
+          <NavLink exact="true" to="/contact" onClick={() => setMenuOpen(false)}>
+            <FontAwesomeIcon icon={faEnvelope} /> Contact
+          </NavLink>
+        </nav>
+        <ul className="mobile-socials">
+          <li><a href="https://www.linkedin.com/in/chirag-jindal-456682223/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a></li>
+          <li><a href="https://github.com/Cj9520" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} /></a></li>
+          <li><a href="https://www.instagram.com/chirag__9520/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faInstagram} /></a></li>
+          <li><a href="https://x.com/Chirag9520" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faXTwitter} /></a></li>
+        </ul>
+      </div>
+    {/*desktop Sidebar */}
     <div className="nav-bar">
         <Link className='logo' to="/">
             <img src={LogoS} alt="logo" />
@@ -47,6 +77,8 @@ const Sidebar = () => (
         </ul>
     </div>
 
-)
+    </div>
+);
 
+}
 export default Sidebar;

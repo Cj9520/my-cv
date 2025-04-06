@@ -20,7 +20,7 @@
 
 }
 
-@for $i from 1 through 43 {
+@for $i from 1 through 45 {
   .text-animate._#{$i} {
     animation-delay: #{$i /15}s;
   }
