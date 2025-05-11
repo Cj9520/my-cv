@@ -114,7 +114,22 @@
       color: #fff;
     }
   }
-} 
+}
+
+.container.about-page {
+  .text-zone {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: auto;
+    vertical-align: initial;
+    display: flex;
+    max-height: none;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
 
 @media screen and (max-width: 1200px) {
   .page {
