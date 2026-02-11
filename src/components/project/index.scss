@@ -1,0 +1,37 @@
+.container.project-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 0;
+  gap: 4vw;
+  background: none;
+  position: relative;
+  overflow: hidden;
+
+    &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: none;
+    pointer-events: none;
+  }
+
+      h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #FFD600;
+      margin-bottom: 2.2rem;
+      letter-spacing: 1px;
+      line-height: 1.1;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+      text-shadow: none;
+      text-align: left;
+    }
+}

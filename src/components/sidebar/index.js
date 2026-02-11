@@ -2,9 +2,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import './index.scss';
 import LogoS from '../../assets/images/CJ.png';
-// import LogoSubtitle from '../../assets/images/logo_sub.png';
+// import LogoSubtitle from '../../assets/images/logo_sub.png'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faHome, faUser, faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faHome, faUser, faTimes, faBars, faFolder } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faInstagram, faLinkedin, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const Sidebar = () => {
@@ -24,6 +24,9 @@ const Sidebar = () => {
           </NavLink>
           <NavLink exact="true" to="/about" onClick={() => setMenuOpen(false)}>
             <FontAwesomeIcon icon={faUser} /> About
+          </NavLink>
+          <NavLink exact="true" to="/projects" onClick={() => setMenuOpen(false)}>
+            <FontAwesomeIcon icon={faFolder} /> Projects
           </NavLink>
           <NavLink exact="true" to="/contact" onClick={() => setMenuOpen(false)}>
             <FontAwesomeIcon icon={faEnvelope} /> Contact
@@ -48,6 +51,9 @@ const Sidebar = () => {
             </NavLink>
             <NavLink exact="true" activeclassname="active" className="about-link" to="/about">
                 <FontAwesomeIcon icon={faUser} color="#4d4d4e" />
+            </NavLink>
+            <NavLink exact="true" activeclassname="active" className="projects-link" to="/projects">
+                <FontAwesomeIcon icon={faFolder} color="#4d4d4e" />
             </NavLink>
             <NavLink exact="true" activeclassname="active" className="contact-link" to="/contact">
                 <FontAwesomeIcon icon={faEnvelope} color="#4d4d4e" />

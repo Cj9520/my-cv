@@ -2,6 +2,12 @@
 
 # dependencies
 /node_modules
+/.history
+/my-portfolio/
+
+# ignore build/output inside my-portfolio and local node_modules there
+my-portfolio/latest/
+my-portfolio/**/node_modules/
 /.pnp
 .pnp.js
 

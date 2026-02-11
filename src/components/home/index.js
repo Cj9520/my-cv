@@ -80,7 +80,7 @@ const Home = () => {
                                 /></span>
                         </h1>
 
-                    <h2>Front End Developer / JavaScript Expert / Student at IIT Kharagpur</h2>
+                    <h2>JavaScript & Python Expert / Web Developer / Data Engineer</h2>
                     <Link to="/contact" className="flat-button">
                         CONTACT ME
                     </Link>
