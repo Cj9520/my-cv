@@ -1,108 +1,155 @@
+// ─── Variables ─────────────────────────────────────────────────────────────────
+$gold: #ffd700;
+$glass-bg: rgba(255, 255, 255, 0.07);
+$glass-border: rgba(255, 255, 255, 0.08);
+$font-display: 'Coolvetica', sans-serif;
+$font-body: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+
+// Cube half-size at each breakpoint (keep in sync with cubespinner size)
+$cube-half-lg: 110px;   // 220px cube → translateZ(110px)
+$cube-half-md: 90px;    // 180px cube → translateZ(90px)
+$cube-half-sm: 80px;    // 160px cube → translateZ(80px)
+$cube-half-xs: 60px;    // 120px cube → translateZ(60px)
+
+// ─── About page ───────────────────────────────────────────────────────────────
+// LARGE SCREENS (>= 901px):
+//   .about-left  = LEFT  50% of viewport  → text-zone centred inside it
+//   .about-right = RIGHT 50% of viewport  → cube centred inside it
+//
+// SMALL / TABLET SCREENS (≤ 900px):
+//   .about-left  = TOP    50vh of viewport → text-zone centred
+//   .about-right = BOTTOM 50vh of viewport → cube centred
+//   Top padding clears the hamburger menu button (~60px)
+
 .container.about-page {
+  // Full-screen absolute positioning (matches the global .container rule)
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden; // clip cube rotation at container boundary
+
+  // ── Large-screen layout: two equal columns ─────────────────────────────────
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 2rem 0;
-  gap: 4vw;
-  background: none;
-  position: relative;
-  overflow: hidden;
+  align-items: stretch;  // columns fill full height
+  padding: 0;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: none;
-    pointer-events: none;
-  }
-
-  .about-left, .about-right {
-    flex: 1 1 0;
+  // ─── Left column — text box ────────────────────────────────────────────────
+  .about-left {
+    flex: 0 0 50%;        // exactly half the width
     display: flex;
-    align-items: center;
+    align-items: center;  // vertically centred in its half
     justify-content: center;
+    padding: 2rem 1.5rem 2rem 2rem;
+    box-sizing: border-box;
     min-width: 0;
   }
 
-  .about-left {
-    justify-content: center;
-    padding-right: 0;
-    align-items: center;
-  }
+  // ─── Right column — cube ───────────────────────────────────────────────────
   .about-right {
+    flex: 0 0 50%;        // exactly the other half
+    display: flex;
+    align-items: center;  // vertically centred in its half
     justify-content: center;
-    padding-left: 0;
-    align-items: center;
+    padding: 2rem 2rem 2rem 1.5rem;
+    box-sizing: border-box;
+    min-width: 0;
+    // Clip cube rotation so it never bleeds into the left half
+    overflow: hidden;
   }
 
+  // ─── Glass text card ────────────────────────────────────────────────────────
   .text-zone {
-    width: 540px;
-    max-width: 98vw;
-    min-width: 340px;
-    z-index: 2;
-    padding: 2.5rem 2.5rem;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 480px;
+    min-width: 0;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: column;
+    box-sizing: border-box;
+
     background: rgba(255, 255, 255, 0.07);
     border-radius: 18px;
     backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.13);
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 0 auto;
-    position: relative;
-    height: auto;
-    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    border: 1px solid $glass-border;
+    padding: 2rem 2rem;
 
     h1 {
-      font-size: 3.5rem;
+      font-size: clamp(1.8rem, 3.5vw, 3rem) !important;
       font-weight: 800;
-      color: #FFD600;
-      margin-bottom: 2.2rem;
+      color: $gold;
+      margin: 0 0 1.2rem !important;
       letter-spacing: 1px;
       line-height: 1.1;
-      background: none;
-      -webkit-background-clip: unset;
-      -webkit-text-fill-color: unset;
-      text-shadow: none;
-      text-align: left;
+      position: static !important;
+      left: auto !important;
+
+      &::before {
+        content: '<h1>';
+        font-family: 'La Belle Aurore', cursive;
+        color: $gold;
+        font-size: 15px;
+        display: block;
+        margin-bottom: 4px;
+        opacity: 0.6;
+        position: static;
+        line-height: 1.4;
+      }
+
+      &::after {
+        content: '<h1/>';
+        font-family: 'La Belle Aurore', cursive;
+        color: $gold;
+        font-size: 15px;
+        display: block;
+        margin-top: 6px;
+        opacity: 0.6;
+        position: static;
+        line-height: 1.4;
+      }
     }
 
     p {
-      font-size: 1.25rem;
-      line-height: 2.1;
-      color: #fff;
-      margin-bottom: 1.7rem;
-      opacity: 1;
+      font-size: 0.95rem !important;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.9) !important;
+      margin: 0 0 0.9rem !important;
       font-weight: 400;
-      text-align: left;
-      letter-spacing: 0.2px;
-      text-shadow: none;
+      font-family: $font-body;
+      text-align: left !important;
+
+      &:last-child { margin-bottom: 0 !important; }
     }
   }
 
+  // ─── Cube container ─────────────────────────────────────────────────────────
+  // Extra padding on all sides = translateZ value, so cube never clips
   .stage-cube-cont {
-    width: 340px;
-    min-width: 220px;
-    max-width: 380px;
-    height: 340px;
-    min-height: 220px;
-    max-height: 380px;
+    position: static !important;
+    // The cube is 220px; with translateZ(110px) the cube face reaches 110px
+    // beyond the origin. Give the container enough room = cube + 2 × translateZ
+    width:  calc(220px + #{$cube-half-lg * 2});   // 220+220 = 440px
+    height: calc(220px + #{$cube-half-lg * 2});
     display: flex;
     justify-content: center;
     align-items: center;
     perspective: 1200px;
-    z-index: 2;
-    margin: 0 auto;
+    flex-shrink: 0;
+    // Clip so rotating faces stay inside this box
+    overflow: hidden;
   }
-  
+
+  // ─── Cube spinner ── animation & face transforms are UNTOUCHED ────────────
   .cubespinner {
     animation-name: spincube;
     animation-timing-function: ease-in-out;
@@ -110,12 +157,11 @@
     animation-duration: 12s;
     transform-style: preserve-3d;
     transform-origin: 110px 110px 0;
-    transition: transform 0.3s ease;
     position: relative;
     width: 220px;
     height: 220px;
     margin: 0 auto;
-  
+
     div {
       position: absolute;
       width: 220px;
@@ -128,15 +174,9 @@
       justify-content: center;
       align-items: center;
       box-shadow: 0 0 20px 0px rgba(94, 212, 244, 0.22);
-      transition: all 0.3s ease;
       backdrop-filter: blur(5px);
-
-      &:hover {
-        transform: scale(1.07);
-        box-shadow: 0 0 30px 0px rgba(94, 212, 244, 0.4);
-      }
     }
-  
+
     .face1 { transform: translateZ(110px); }
     .face2 { transform: rotateY(90deg) translateZ(110px); }
     .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(110px); }
@@ -146,255 +186,169 @@
   }
 }
 
+// ─── Keyframes — UNCHANGED ─────────────────────────────────────────────────
 @keyframes spincube {
   from, to { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-  16% { transform: rotateY(-90deg) rotateZ(90deg); }
-  33% { transform: rotateY(-90deg) rotateX(90deg); }
-  50% { transform: rotateY(-180deg) rotateZ(90deg); }
-  66% { transform: rotateY(-270deg) rotateX(90deg); }
-  83% { transform: rotateX(90deg); }
+  16%  { transform: rotateY(-90deg) rotateZ(90deg); }
+  33%  { transform: rotateY(-90deg) rotateX(90deg); }
+  50%  { transform: rotateY(-180deg) rotateZ(90deg); }
+  66%  { transform: rotateY(-270deg) rotateX(90deg); }
+  83%  { transform: rotateX(90deg); }
 }
 
-@media screen and (max-width: 1200px) {
+// ─── Medium screens (901–1200px): side-by-side, slightly smaller cube ───────
+@media screen and (max-width: 1200px) and (min-width: 901px) {
   .container.about-page {
-    .text-zone {
-      width: 350px;
-      padding: 2rem 1rem;
-    }
+    .about-left  { padding: 1.5rem 1rem 1.5rem 1.5rem; }
+    .about-right { padding: 1.5rem 1.5rem 1.5rem 1rem; }
+
+    .text-zone { max-width: 420px; }
+
     .stage-cube-cont {
-      width: 220px;
-      height: 220px;
-      min-width: 180px;
-      min-height: 180px;
+      width:  calc(180px + #{$cube-half-md * 2});
+      height: calc(180px + #{$cube-half-md * 2});
     }
-    .cubespinner, .cubespinner div {
-      width: 150px;
-      height: 150px;
-      font-size: 60px;
+
+    .cubespinner,
+    .cubespinner div {
+      width: 180px;
+      height: 180px;
+      font-size: 70px;
     }
+
     .cubespinner {
-      transform-origin: 75px 75px 0;
-    }
-    .cubespinner .face1,
-    .cubespinner .face2,
-    .cubespinner .face3,
-    .cubespinner .face4,
-    .cubespinner .face5,
-    .cubespinner .face6 {
-      transform: translateZ(75px);
+      transform-origin: 90px 90px 0;
+      .face1 { transform: translateZ(90px); }
+      .face2 { transform: rotateY(90deg) translateZ(90px); }
+      .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(90px); }
+      .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(90px); }
+      .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(90px); }
+      .face6 { transform: rotateX(-90deg) translateZ(90px); }
     }
   }
 }
 
+// ─── Small screens / tablets (≤ 900px): stack vertically ───────────────────
+// Top half = text box, bottom half = cube
+// 60px top-padding clears the hamburger menu button
 @media screen and (max-width: 900px) {
   .container.about-page {
+    position: initial;    // let the page scroll naturally
+    height: auto;
+    min-height: 100vh;
     flex-direction: column;
     align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 0;
-    min-height: 100vh;
 
-    .about-left, .about-right {
-      width: 100%;
-      height: 50vh;
-      min-height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-    }
+    // Top half — text box
     .about-left {
-      background: none;
-    }
-    .about-right {
-      background: none;
-    }
-    .text-zone {
-      width: 100% !important;
-      max-width: 95vw !important;
-      min-width: 0 !important;
-      padding: 1.2rem !important;
-      box-sizing: border-box !important;
-      overflow-wrap: break-word !important;
-      word-break: break-word !important;
-      overflow: auto !important;
-      background: rgba(30, 30, 30, 0.7) !important;
-      border-radius: 20px !important;
-      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25), 0 1.5px 8px 0 rgba(0,0,0,0.10) !important;
-      border: 1.5px solid rgba(255,255,255,0.08) !important;
-      margin: 0 auto !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      height: auto !important;
-      h1 {
-        font-size: 1.3rem !important;
-        text-align: center !important;
-        margin-bottom: 1.2rem !important;
-      }
-      p {
-        font-size: 1rem !important;
-        text-align: center !important;
-        margin-bottom: 1rem !important;
-      }
-    }
-    .stage-cube-cont {
-      width: min(90vw, 220px);
-      height: min(45vh, 220px);
-      min-width: 120px;
-      min-height: 120px;
-      max-width: 220px;
-      max-height: 220px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
+      flex: 0 0 50vh;
+      min-height: 320px;
+      width: 100%;
+      padding: 70px 1.2rem 1.5rem; // 70px top = clears hamburger menu (~55px) + breathing room
       align-items: center;
-      position: relative;
-      z-index: 1;
+      justify-content: center;
     }
-    .cubespinner {
+
+    // Bottom half — cube
+    .about-right {
+      flex: 0 0 50vh;
+      min-height: 280px;
       width: 100%;
-      height: 100%;
-      min-width: 120px;
-      min-height: 120px;
-      max-width: 220px;
-      max-height: 220px;
-      font-size: 2.5rem;
-      z-index: 1;
-      position: relative;
+      padding: 1.5rem 1.2rem 2rem;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .text-zone {
+      max-width: 500px !important;
+      width: 100% !important;
+      padding: 1.5rem 1.4rem !important;
+      text-align: center;
+
+      h1 {
+        font-size: 1.8rem !important;
+        text-align: center;
+        margin-bottom: 1rem !important;
+
+        &::before, &::after { text-align: center; }
+      }
+
+      p {
+        font-size: 0.92rem !important;
+        text-align: center !important;
+      }
+    }
+
+    .stage-cube-cont {
+      width:  calc(160px + #{$cube-half-sm * 2}) !important;
+      height: calc(160px + #{$cube-half-sm * 2}) !important;
+    }
+
+    .cubespinner,
+    .cubespinner div {
+      width: 160px;
+      height: 160px;
+      font-size: 65px;
+    }
+
+    .cubespinner {
+      transform-origin: 80px 80px 0;
+      .face1 { transform: translateZ(80px); }
+      .face2 { transform: rotateY(90deg) translateZ(80px); }
+      .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(80px); }
+      .face4 { transform: rotateY(180deg) rotateZ(80px); }
+      .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(80px); }
+      .face6 { transform: rotateX(-90deg) translateZ(80px); }
+    }
+  }
+}
+
+// ─── Extra-small phones (≤ 500px) ──────────────────────────────────────────
+@media screen and (max-width: 500px) {
+  .container.about-page {
+    .about-left {
+      flex: 0 0 auto;
+      min-height: 280px;
+      padding: 65px 0.9rem 1.2rem;
+    }
+
+    .about-right {
+      flex: 0 0 auto;
+      min-height: 240px;
+      padding: 1rem 0.9rem 1.5rem;
+    }
+
+    .text-zone {
+      padding: 1.2rem 1rem !important;
+
+      h1  { font-size: 1.5rem !important; }
+      p   { font-size: 0.85rem !important; }
+    }
+
+    .stage-cube-cont {
+      width:  calc(120px + #{$cube-half-xs * 2}) !important;
+      height: calc(120px + #{$cube-half-xs * 2}) !important;
+    }
+
+    .cubespinner,
+    .cubespinner div {
+      width: 120px;
+      height: 120px;
+      font-size: 48px;
+    }
+
+    .cubespinner {
       transform-origin: 60px 60px 0;
+      .face1 { transform: translateZ(60px); }
+      .face2 { transform: rotateY(90deg) translateZ(60px); }
+      .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(60px); }
+      .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(60px); }
+      .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(60px); }
+      .face6 { transform: rotateX(-90deg) translateZ(60px); }
     }
-    .cubespinner div {
-      width: 100%;
-      height: 100%;
-      min-width: 120px;
-      min-height: 120px;
-      max-width: 220px;
-      max-height: 220px;
-      font-size: 2.5rem;
-      z-index: 1;
-      position: absolute;
-    }
-    .cubespinner .face1 { transform: translateZ(60px); }
-    .cubespinner .face2 { transform: rotateY(90deg) translateZ(60px); }
-    .cubespinner .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(60px); }
-    .cubespinner .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(60px); }
-    .cubespinner .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(60px); }
-    .cubespinner .face6 { transform: rotateX(-90deg) translateZ(60px); }
   }
 }
-
-@media screen and (max-width: 600px) {
-  .container.about-page {
-    .text-zone {
-      padding: 1.2rem 0.3rem;
-      h1 {
-        font-size: 1.5rem;
-      }
-      p {
-        font-size: 1.05rem;
-      }
-    }
-    .stage-cube-cont {
-      width: min(90vw, 140px);
-      height: min(90vw, 140px);
-      min-width: 80px;
-      min-height: 80px;
-      max-width: 140px;
-      max-height: 140px;
-      margin-top: 1.2rem;
-      &::before {
-        top: -10px;
-        left: -10px;
-        right: -10px;
-        bottom: -10px;
-        filter: blur(5px);
-      }
-    }
-    .cubespinner {
-      width: 100%;
-      height: 100%;
-      min-width: 80px;
-      min-height: 80px;
-      max-width: 140px;
-      max-height: 140px;
-      font-size: 1.5rem;
-      z-index: 1;
-      position: relative;
-      transform-origin: 40px 40px 0;
-    }
-    .cubespinner div {
-      width: 100%;
-      height: 100%;
-      min-width: 80px;
-      min-height: 80px;
-      max-width: 140px;
-      max-height: 140px;
-      font-size: 1.5rem;
-      z-index: 1;
-      position: absolute;
-    }
-    .cubespinner .face1 { transform: translateZ(40px); }
-    .cubespinner .face2 { transform: rotateY(90deg) translateZ(40px); }
-    .cubespinner .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(40px); }
-    .cubespinner .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(40px); }
-    .cubespinner .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(40px); }
-    .cubespinner .face6 { transform: rotateX(-90deg) translateZ(40px); }
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .container.about-page {
-    min-height: 100vh;
-    .text-zone {
-      padding: 0.7rem 0.1rem;
-      h1 {
-        font-size: 1.1rem;
-      }
-      p {
-        font-size: 0.95rem;
-      }
-    }
-    .stage-cube-cont {
-      width: 70vw;
-      height: 70vw;
-      min-width: 60px;
-      min-height: 60px;
-      max-width: 90px;
-      max-height: 90px;
-      margin: 1.2rem auto 0 auto;
-    }
-    .cubespinner {
-      width: 100%;
-      height: 100%;
-      min-width: 60px;
-      min-height: 60px;
-      max-width: 90px;
-      max-height: 90px;
-      font-size: 1.1rem;
-      z-index: 1;
-      position: relative;
-      transform-origin: 30px 30px 0;
-    }
-    .cubespinner div {
-      width: 100%;
-      height: 100%;
-      min-width: 60px;
-      min-height: 60px;
-      max-width: 90px;
-      max-height: 90px;
-      font-size: 1.1rem;
-      z-index: 1;
-      position: absolute;
-    }
-    .cubespinner .face1 { transform: translateZ(30px); }
-    .cubespinner .face2 { transform: rotateY(90deg) translateZ(30px); }
-    .cubespinner .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(30px); }
-    .cubespinner .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(30px); }
-    .cubespinner .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(30px); }
-    .cubespinner .face6 { transform: rotateX(-90deg) translateZ(30px); }
-  }
-}
-  

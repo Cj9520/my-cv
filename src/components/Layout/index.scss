@@ -42,7 +42,8 @@
 
 .container.contact-page,
 .container.about-page,
-.container.portfolio-page {
+.container.portfolio-page,
+.container.project-page {
   
     h1 {
       font-size: 53px;
@@ -98,7 +99,8 @@
       }
     }
 
-  .text-zone {
+  // Global text-zone rule — NOT applied to about-page (it owns its layout)
+  &:not(.about-page) .text-zone {
     position: absolute;
     left: 10%;
     top: 50%;
@@ -116,7 +118,18 @@
   }
 }
 
-.container.about-page {
+.container.project-page {
+    .text-zone {
+      position: absolute;
+      left: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 35%;
+      vertical-align: middle;
+      display: table-cell;
+      max-height: 90%;
+    }
+.container.about-page,
   .text-zone {
     position: static;
     left: auto;
@@ -141,9 +154,10 @@
     height: auto;
     min-height: auto;
 
+    // about-page manages its own responsive layout — excluded here
     &.contact-page,
-    &.about-page,
-    &.portfolio-page {
+    &.portfolio-page,
+    &.project-page {
       .text-zone {
         position: initial;
         transform: none;
@@ -171,10 +185,6 @@
     }
   }
 
-  .stage-cube-cont {
-    position: initial;
-    width: 100%;
-    height: 0%;
-    overflow: visible;
-  }
+  // stage-cube-cont sizing is handled per-page
+  // (removed the height:0 rule that was hiding the cube on small screens)
 }

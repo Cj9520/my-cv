@@ -25,7 +25,7 @@ const Sidebar = () => {
           <NavLink exact="true" to="/about" onClick={() => setMenuOpen(false)}>
             <FontAwesomeIcon icon={faUser} /> About
           </NavLink>
-          <NavLink exact="true" to="/projects" onClick={() => setMenuOpen(false)}>
+          <NavLink exact="true" to="/project" onClick={() => setMenuOpen(false)}>
             <FontAwesomeIcon icon={faFolder} /> Projects
           </NavLink>
           <NavLink exact="true" to="/contact" onClick={() => setMenuOpen(false)}>
@@ -52,7 +52,7 @@ const Sidebar = () => {
             <NavLink exact="true" activeclassname="active" className="about-link" to="/about">
                 <FontAwesomeIcon icon={faUser} color="#4d4d4e" />
             </NavLink>
-            <NavLink exact="true" activeclassname="active" className="projects-link" to="/projects">
+            <NavLink exact="true" activeclassname="active" className="projects-link" to="/project">
                 <FontAwesomeIcon icon={faFolder} color="#4d4d4e" />
             </NavLink>
             <NavLink exact="true" activeclassname="active" className="contact-link" to="/contact">
